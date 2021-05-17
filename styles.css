@@ -1,0 +1,36 @@
+.appbar{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-self: flex-start;
+  flex-grow: 1;
+  background-color: black;
+  color: white;
+  background-color: #333;
+  /* position: fixed; Set the navbar to fixed position */
+  /* top: 0; Position the navbar at the top of the page */
+}
+.appbar__title{
+  font-size: 18px;
+  font-weight: 900;
+  padding: 10px 2px;
+  margin-left: 20px;
+}
+#app{
+  /* height:90vh ; */
+  margin-top: 10px;
+  background-color: antiquewhite;
+  color: black;
+  padding: 10px;
+}
+
+.footer{
+  color: white;
+  background-color: black;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed; /* Set the navbar to fixed position */
+  bottom: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
