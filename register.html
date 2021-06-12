@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;
+    }
+
+.footer{
+  color: white;
+  background-color: #7AC968;
+  position: fixed; 
+  bottom: 0; 
+  width: 100%;
+}
+
+.footer p{
+  padding: 10px;
+  text-align: center;
+}
+
+.content{
+  color: #394141;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 14px auto;
+}
+.btn{
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  background-color:#7AC968;
+  color: white;
+  border-radius: 100%;
+  padding: 10px;
+  margin: 10px;
+  z-index: 2;
+}
+
+form{
+  padding: 20px;
+}
+
+form .form-input{
+  display: block;
+}
+
+.form-input label{
+  display:block;
+  padding: 15px 0px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #394141;
+}
+
+form input{
+  width: 100%;
+  padding: 10px;
+}
+
+form button{
+  display: block;
+  padding: 16px;
+  background-color: #7AC968;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  margin: 20px auto;
+  font-weight: 600;
+  width: 100%;
+}
+.login__header{
+  padding: 40px ;
+  align-content: center;
+}
+
+.login__header h4{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+  </style>
+  <title>Farmsol</title>
+</head>
+<body>
+  <div class="login__header">
+    <h4>Welcome! Lets sign you in</h4>
+  </div>
+  <div id="login">
+    <form class="form">
+      <div class="form-input">
+        <label>Enter Name</label>
+        <input type="text" name="name" id="name"> 
+      </div>
+      <div class="form-input">
+        <label>Enter Email</label>
+        <input type="email" name="email" id="email"> 
+      </div>
+      <div class="form-input">
+        <label>Enter Password</label>
+        <input type="password" name="password" id="password"> 
+      </div>
+      <button id="register">Register</button>
+    </form>
+  </div>
+  <div class="footer">
+    <p>Farmsol &copy 2021</p>
+  </div>
+  <script >
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+
+      document.getElementById('register').addEventListener('click', ()=>{
+        if(name.value.length > 0 && email.value.length > 0 && password.value.length > 0 ){
+          console.log('registration successful');
+          window.location.href = 'http://localhost:5500/index.html';
+        }else{
+          console.log('Registration failed please try again');
+        }
+      })
+    })
+  </script>
+</body>
+</html>
