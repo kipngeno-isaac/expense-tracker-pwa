@@ -107,7 +107,7 @@ form button{
         <label>Enter Amount</label>
         <input type="text" name="amount" id="amount"> 
       </div>
-      <button id="saveExpenseBtn">Save Expense</button>
+      <button type="submit" id="saveExpenseBtn">Save Expense</button>
     </form>
   </div>
   <div class="footer">
@@ -149,13 +149,16 @@ form button{
         category.appendChild(option);
       }
 
-      document.getElementById('saveExpenseBtn').addEventListener('click', ()=>{
-        if(name.value.length > 0 && email.value.length > 0 && password.value.length > 0 && phone.value.length > 0){
-          console.log('registration successful');
+      document.querySelector('form').addEventListener('submit', (event)=>{
+        event.preventDefault();
+        console.log('category', category.value);
+        console.log('amount', amount.value);
+        if(category.value.length > 0 && amount.value.length > 0 ){
+          console.log('expense saved successfully');
           
-          window.location.href = 'http://localhost:5500/index.html';
+          window.location.href = 'index.html';
         }else{
-          console.log('Registration failed please try again');
+          console.log('Failed to save Expense');
         }
       })
     })
