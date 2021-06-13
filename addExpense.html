@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <link rel="manifest" href="/manifest.json">
+  <style>
+      *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+    }
+.appbar{
+  width: 100%;
+  background-color:#7AC968;
+  color: white;
+  position: fixed;
+  top: 0px;
+  padding: 10px;
+  z-index: 2;
+}
+.appbar__title{
+  font-size: 18px;
+  font-weight: 900;
+  padding: 10px 20px;
+}
+.footer{
+  color: white;
+  background-color: #7AC968;
+  position: fixed; 
+  bottom: 0; 
+  width: 100%;
+}
+
+.footer p{
+  padding: 10px;
+  text-align: center;
+}
+
+form{
+  margin-top: 40px;
+  padding: 20px;
+}
+
+form .form-input{
+  display: block;
+}
+
+.form-input label{
+  display:block;
+  padding: 15px 0px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #394141;
+}
+
+form input, select, textarea{
+  width: 100%;
+  padding: 10px;
+}
+
+form button{
+  display: block;
+  padding: 16px;
+  background-color: #7AC968;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  margin: 20px auto;
+  font-weight: 600;
+  width: 100%;
+}
+.login__header{
+  padding: 40px ;
+  align-content: center;
+}
+
+.login__header h4{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+  </style>
+  <title>Farmsol</title>
+</head>
+<body>
+  <div class="appbar">
+    <h4 class="appbar__title">FarmSpace</h4>
+  </div>
+  <div id="app">
+    <form class="form">
+      <div class="form-input">
+        <label>Select Category</label>
+        <select name="category" id="category">
+          <option value="" disabled>Select Category</option>
+        </select>
+      </div>
+      <div class="form-input">
+        <label>Description</label>
+        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+      </div>
+      <div class="form-input">
+        <label>Enter Amount</label>
+        <input type="text" name="amount" id="amount"> 
+      </div>
+      <button id="saveExpenseBtn">Save Expense</button>
+    </form>
+  </div>
+  <div class="footer">
+    <p>Farmsol &copy 2021</p>
+  </div>
+  <script >
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const category = document.getElementById('category');
+      const description = document.getElementById('description');
+      const amount = document.getElementById('amount');
+
+      const categories = [
+        {
+          id: 1,
+          name:'Food'
+        },
+        {
+          id: 2,
+          name: 'Fare'
+        },
+        {
+          id: 3,
+          name: 'Education'
+        },
+        {
+          id: 4,
+          name: 'Electricity'
+        },
+        {
+          id: 5,
+          name: 'Groceries'
+        }
+      ];
+
+      for(let i = 0; i < categories.length; i++){
+        const option = document.createElement('option');
+        option.value = categories[i].id;
+        option.textContent = categories[i].name;
+        category.appendChild(option);
+      }
+
+      document.getElementById('saveExpenseBtn').addEventListener('click', ()=>{
+        if(name.value.length > 0 && email.value.length > 0 && password.value.length > 0 && phone.value.length > 0){
+          console.log('registration successful');
+          
+          window.location.href = 'http://localhost:5500/index.html';
+        }else{
+          console.log('Registration failed please try again');
+        }
+      })
+    })
+  </script>
+</body>
+</html>
