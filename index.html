@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="/manifest.json">
   <style>
     *{
       padding: 0;
@@ -12,7 +13,6 @@
     }
     body{
       font-family: Arial, Helvetica, sans-serif;
-  background-color: antiquewhite;
     }
 .appbar{
   width: 100%;
@@ -29,8 +29,7 @@
   padding: 10px 20px;
 }
 #app{
-  color: #5BB462;
-  padding: 60px 20px;
+  padding: 60px 0px;
 }
 
 .footer{
@@ -67,48 +66,46 @@
   margin: 10px;
   z-index: 2;
 }
-.login {
-  margin: 40px auto;
-  padding: 20px;
-  width: 60%;
-  background-color: #fff;
-  border-radius: 6px;
-}
 
-.login form{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-}
 
-.login form .form-input{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.form-input label{
-  padding: 5px;
-  margin-top: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #394141;
-}
-
-.form-input input{
-  padding: 10px;
-  margin-top: 20px;
-}
-
-.login form button{
-  padding: 16px;
-  margin: 20px 10px;
+.expense__banner{
   background-color: #7AC968;
   color: #fff;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 20px;
+  margin: 20px 20px;
+  border-radius: 10px;
+}
+
+.expense_title{
+  margin: 20px 0px;
+  text-align: right;
+}
+
+.expense_total{
+ text-align: right;
+}
+
+.expense_categories{
+  display: block;
+  width: 100%;
+  background-color: #fff;
+  color: #394141;
+  border-radius: 10px;
+  margin: 5px;
+}
+.expense_name{
+  width: 45%;
+  padding: 20px;
+  display: inline-block;
+}
+.expense_amount{
+  width: 45%;
+  padding: 20px;
+  display: inline-block;
+  text-align: right;
+}
+.expense{
+  border-bottom: 1px solid gray ;
 }
 
   </style>
@@ -118,7 +115,18 @@
   <div class="appbar">
     <h4 class="appbar__title">FarmSpace</h4>
   </div>
-  <div id="app"></div>
+  <div id="app">
+    <div class="expense__banner">
+      <h6 class="expense_title">Total Expenses</h6>
+      <h3 class="expense_total">Ksh 10,567.00</h3>
+    </div>
+    <div class="expense_categories">
+      <div class= "expense">
+        <div class="expense_name">Food</div>
+        <div class="expense_amount"> Ksh 1,250.00</div>
+      </div>
+    </div>
+  </div>
   <div class="">
     <button class="btn">Add</button>
   </div>
