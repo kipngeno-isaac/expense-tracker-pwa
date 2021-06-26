@@ -19,8 +19,8 @@ const assets = [
 
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
-    caches.open(staticExpenses).then(cache => {
-      cache.addAll(assets)
+    caches.open('personal-expense-tracker-v1').then(cache => {
+      cache.addAll(['/', 'app.js'])
     })
   )
 });
