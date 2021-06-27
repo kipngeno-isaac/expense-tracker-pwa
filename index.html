@@ -1,147 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A simple PWA for tracking personal expenses">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
-  <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5">
-  <link rel="manifest" href="manifest.json">
-  
-  <style>
-    *{
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-    body{
-      font-family: Arial, Helvetica, sans-serif;
-    }
-.appbar{
-  width: 100%;
-  background-color:#7AC968;
-  color: white;
-  position: fixed;
-  top: 0px;
-  padding: 10px;
-  z-index: 2;
-}
-.appbar__title{
-  font-size: 18px;
-  font-weight: 900;
-  padding: 10px 20px;
-}
-#app{
-  padding: 60px 0px;
-}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple PWA for tracking personal expenses">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
 
-.footer{
-  color: white;
-  background-color: #7AC968;
-  position: fixed; 
-  bottom: 0; 
-  width: 100%;
-}
+    <style>
+        .appbar {
+            width: 100%;
+            background-color: #4C2C85;
+            color: #FFDE00;
+            position: fixed;
+            top: 0px;
+            padding: 10px;
+            z-index: 2;
+        }
 
-.footer p{
-  padding: 10px;
-  text-align: center;
-}
+        .appbar__title {
+            font-size: 18px;
+            font-weight: 900;
+            padding: 10px 20px;
+        }
 
-.content{
-  color: #394141;
-  background-color: white;
-  border: 1px solid grey;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 14px auto;
-}
-.btn{
-  width: 60px;
-  height: 60px;
-  position: fixed;
-  bottom: 40px;
-  right: 10px;
-  background-color:#7AC968;
-  color: white;
-  border-radius: 100%;
-  padding: 10px;
-  margin: 10px;
-  z-index: 2;
-}
+        #app {
+            padding: 60px 0px;
+        }
 
+        .btn {
+            width: 60px;
+            height: 60px;
+            position: fixed;
+            bottom: 40px;
+            right: 10px;
+            background-color: #F54697;
+            color: white;
+            border-radius: 100%;
+            padding: 10px;
+            margin: 10px;
+            z-index: 2;
+            border: 0px;
+        }
 
-.expense__banner{
-  background-color: #7AC968;
-  color: #fff;
-  padding: 20px;
-  margin: 20px 20px;
-  border-radius: 10px;
-}
+        .expense__banner {
+            background-color: #4C2C85;
+            color: #fff;
+            padding: 20px;
+            margin: 20px 20px;
+            border-radius: 10px;
+        }
 
-.expense_title{
-  margin: 20px 0px;
-  text-align: right;
-}
+        .expense_title {
+            margin: 20px 0px;
+            text-align: right;
+            color: #FFDE00;
+        }
 
-.expense_total{
- text-align: right;
-}
+        .expense_total {
+            text-align: right;
+        }
 
-.expense_categories{
-  display: block;
-  width: 100%;
-  background-color: #fff;
-  color: #394141;
-  border-radius: 10px;
-  margin: 5px;
-}
-.expense_name{
-  width: 45%;
-  padding: 20px;
-  display: inline-block;
-}
-.expense_amount{
-  width: 45%;
-  padding: 20px;
-  display: inline-block;
-  text-align: right;
-}
-.expense{
-  border-bottom: 1px solid gray ;
-}
+        .expense_categories {
+            display: block;
+            width: 100%;
+            background-color: #fff;
+            color: #394141;
+            border-radius: 10px;
+            margin: 5px;
+        }
 
-  </style>
-  <title>Farmsol</title>
+        .expense_name {
+            width: 45%;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        .expense_amount {
+            width: 45%;
+            padding: 20px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .expense {
+            border-bottom: 1px solid gray;
+        }
+
+    </style>
+    <title>Expense Tracker</title>
 </head>
 <body>
-  <div class="appbar">
-    <h4 class="appbar__title">FarmSpace</h4>
-  </div>
-  <div id="app">
+<div class="appbar">
+    <h4 class="appbar__title">Expense Tracker</h4>
+</div>
+<div id="app">
     <div class="expense__banner">
-      <h6 class="expense_title">Total Expenses</h6>
-      <h3 class="expense_total">Ksh 10,567.00</h3>
+        <h6 class="expense_title">Total Expenses</h6>
+        <h3 class="expense_total">Ksh 10,567.00</h3>
     </div>
     <div class="expense_categories">
-      <div class= "expense">
-        <div class="expense_name">Food</div>
-        <div class="expense_amount"> Ksh 1,250.00</div>
-      </div>
+        <div class="expense">
+            <div class="expense_name">Food</div>
+            <div class="expense_amount"> Ksh 1,250.00</div>
+        </div>
     </div>
-  </div>
-  <div class="">
+</div>
+<div class="">
     <button class="btn">Add</button>
-  </div>
-  <div class="footer">
-    <p>Farmsol &copy 2021</p>
-  </div>
-  <script src="app.js"></script>
-  <script src="index.js"></script>
+</div>
+<div class="footer">
+    <p>FarmSpace Media &copy 2021</p>
+</div>
+<script src="app.js"></script>
+<script src="index.js"></script>
 </body>
 </html>

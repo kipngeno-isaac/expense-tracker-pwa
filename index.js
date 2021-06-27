@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   let data = state.expenses;
-  //setContent(data)
+  setContent(data)
   console.log('data', data);
 
   document.querySelector('.btn').addEventListener('click', (event) => {
