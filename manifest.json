@@ -1,7 +1,7 @@
 {
   "name": "Personal Expense Tracker",
   "short_name": "Expenses Tracker",
-  "scope": "/",
+  "scope": "./",
   "start_url": "/login.html",
   "icons": [
     {
