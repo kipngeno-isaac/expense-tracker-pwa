@@ -105,7 +105,7 @@ form button{
 </head>
 <body>
   <div class="login__header">
-    <h4>Welcome! Lets sign you in</h4>
+    <h4>Welcome! Lets sign you up</h4>
   </div>
   <div id="login">
     <form class="form">
@@ -126,6 +126,7 @@ form button{
         <input type="password" name="password" id="password"> 
       </div>
       <button id="register">Register</button>
+      <p>Already have an account, <a href="login.html">Sign In</a></p>
     </form>
   </div>
   <div class="footer">
@@ -139,15 +140,48 @@ form button{
       const password = document.getElementById('password');
       const phone = document.getElementById('phone');
 
-      document.getElementById('register').addEventListener('click', ()=>{
+      document.querySelector('form').addEventListener('submit', (event)=>{
+        event.preventDefault();
         if(name.value.length > 0 && email.value.length > 0 && password.value.length > 0 && phone.value.length > 0){
           console.log('registration successful');
-          
-          window.location.href = 'http://localhost:5500/index.html';
+          const payload = {
+            name: name.value,
+            email: email.value,
+            phone: phone.value,
+            password: password.value
+          };
+
+          fetch('https://adonis-personal-finance-api.herokuapp.com/auth/register', {
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            register(data);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+
         }else{
           console.log('Registration failed please try again');
         }
       })
+
+      function register(data){
+        if(data.status){
+          localStorage.clear();
+          localStorage.setItem('user', JSON.stringify(data.user));
+          window.location.href = 'index.html';
+        }else{
+          const errMsg = `<p>${data.message}</p>`;
+          document.querySelector('form').appendChild(errMsg);
+        }
+      }
     })
   </script>
 </body>

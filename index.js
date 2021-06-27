@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const app = document.getElementById('app');
-  const expenseCategories = document.querySelector('.expense_categories');
 
   const state = {};
 
-  state.auth = false;
-  const data = [
+
+  state.user = JSON.parse(localStorage.getItem('user'));
+  state.auth = state.user.length > 0;
+
+  state.expenses = [
     {
       name: 'Food',
       amount: 1200
@@ -22,12 +23,44 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Medical',
       amount: 11200
     },
-  ]
+  ];
 
+  const url = `https://adonis-personal-finance-api.herokuapp.com/api/v1/expenses?page=${1}&&user_id=${state.user.id}`
+  if (state.auth) {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        if (data.status && data.expenses.total > 0) {
+          state.expenses = data.expenses.data;
+          setContent(data.expenses.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+  console.log('authenticated', state.auth);
+
+
+  let data = state.expenses;
+  //setContent(data)
+  console.log('data', data);
+
+  document.querySelector('.btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    window.location.href = 'addExpense.html';
+  })
+
+  console.log('content loaded');
+});
+
+function setContent(data) {
+  const expenseCategories = document.querySelector('.expense_categories');
   let totalExpenses = 0;
   for (let i = 0; i < data.length; i++) {
     console.log('i :', data[i]);
-    totalExpenses += data[i].amount;
+    totalExpenses += parseFloat(data[i].amount);
     const expenseWrapper = document.createElement('div');
     expenseWrapper.classList.add('expense');
 
@@ -47,10 +80,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelector('.expense_total').textContent = totalExpenses.toLocaleString('en-KE', { style: 'currency', currency: 'KES' });
 
-  document.querySelector('.btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    window.location.href = 'addExpense.html';
-  })
-
-  console.log('content loaded');
-});
+}

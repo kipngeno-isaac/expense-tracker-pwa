@@ -100,15 +100,15 @@ form button{
   </div>
   <div id="app">
     <form class="form">
-      <div class="form-input">
+      <!-- <div class="form-input">
         <label>Select Category</label>
         <select name="category" id="category">
           <option value="" disabled>Select Category</option>
         </select>
-      </div>
+      </div> -->
       <div class="form-input">
-        <label>Description</label>
-        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+        <label>Expense Name</label>
+        <input type="text" name="expenseName" id="expenseName" >
       </div>
       <div class="form-input">
         <label>Enter Amount</label>
@@ -123,48 +123,74 @@ form button{
   <script src="app.js"></script>
   <script >
     document.addEventListener('DOMContentLoaded', ()=>{
-      const category = document.getElementById('category');
-      const description = document.getElementById('description');
+      // const category = document.getElementById('category');
+      const expenseName = document.getElementById('expenseName');
       const amount = document.getElementById('amount');
+      const user = JSON.parse(localStorage.getItem('user'));
+console.log('local', user.id);
+      // const categories = [
+      //   {
+      //     id: 1,
+      //     name:'Food'
+      //   },
+      //   {
+      //     id: 2,
+      //     name: 'Fare'
+      //   },
+      //   {
+      //     id: 3,
+      //     name: 'Education'
+      //   },
+      //   {
+      //     id: 4,
+      //     name: 'Electricity'
+      //   },
+      //   {
+      //     id: 5,
+      //     name: 'Groceries'
+      //   }
+      // ];
 
-      const categories = [
-        {
-          id: 1,
-          name:'Food'
-        },
-        {
-          id: 2,
-          name: 'Fare'
-        },
-        {
-          id: 3,
-          name: 'Education'
-        },
-        {
-          id: 4,
-          name: 'Electricity'
-        },
-        {
-          id: 5,
-          name: 'Groceries'
-        }
-      ];
-
-      for(let i = 0; i < categories.length; i++){
-        const option = document.createElement('option');
-        option.value = categories[i].id;
-        option.textContent = categories[i].name;
-        category.appendChild(option);
-      }
+      // for(let i = 0; i < categories.length; i++){
+      //   const option = document.createElement('option');
+      //   option.value = categories[i].id;
+      //   option.textContent = categories[i].name;
+      //   category.appendChild(option);
+      // }
 
       document.querySelector('form').addEventListener('submit', (event)=>{
         event.preventDefault();
-        console.log('category', category.value);
+        // console.log('category', category.value);
         console.log('amount', amount.value);
-        if(category.value.length > 0 && amount.value.length > 0 ){
+        if(expenseName.value.length > 0 && amount.value.length > 0 ){
           console.log('expense saved successfully');
+          const payload = {
+            user_id: user.id,
+            name: expenseName.value,
+            amount: amount.value
+          };
+          console.log('payload', payload);
+          fetch('https://adonis-personal-finance-api.herokuapp.com/api/v1/expenses', {
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            // register(data);
+            if(data.status){
+              window.location.href = 'index.html';
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+
           
-          window.location.href = 'index.html';
+          
         }else{
           console.log('Failed to save Expense');
         }
