@@ -4,55 +4,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   state.user = JSON.parse(localStorage.getItem('user'));
-  state.auth = state.user.length > 0;
-
-  state.expenses = [
-    {
-      name: 'Food',
-      amount: 1200
-    },
-    {
-      name: 'Entertainment',
-      amount: 3200
-    },
-    {
-      name: 'Fare',
-      amount: 1000
-    },
-    {
-      name: 'Medical',
-      amount: 11200
-    },
-  ];
-
-  const url = `https://adonis-personal-finance-api.herokuapp.com/api/v1/expenses?page=${1}&&user_id=${state.user.id}`
-  if (state.auth) {
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-        if (data.status && data.expenses.total > 0) {
-          state.expenses = data.expenses.data;
-          setContent(data.expenses.data);
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
-  console.log('authenticated', state.auth);
+  console.log('user', state.user);
 
 
-  let data = state.expenses;
-  setContent(data)
-  console.log('data', data);
+  const url = `https://adonis-personal-finance-api.herokuapp.com/api/v1/expenses?page=${1}&user_id=${state.user.id}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      if (data.status && data.expenses.total > 0) {
+        state.expenses = data.expenses.data;
+        setContent(data.expenses.data);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+
 
   document.querySelector('.btn').addEventListener('click', (event) => {
     event.preventDefault();
     window.location.href = 'addExpense.html';
   })
 
-  console.log('content loaded');
 });
 
 function setContent(data) {
