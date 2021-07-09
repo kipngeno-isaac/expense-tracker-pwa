@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelector('.btn').addEventListener('click', (event) => {
     event.preventDefault();
-    window.location.href = 'addExpense.html';
+    window.location.href = 'expense.html';
   })
 
 });

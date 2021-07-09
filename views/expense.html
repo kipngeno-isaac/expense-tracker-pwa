@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple PWA for tracking personal expenses">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="../assets/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="/assets/css/expense.css">
+    <title>Expense Tracker</title>
+</head>
+
+<body>
+    <div class="appbar">
+        <h4 class="appbar__title">💰 Xpense Tracker</h4>
+    </div>
+    <div class="expense">
+        <div id="app">
+            <form class="form">
+                <img class="expense-svg" src="../assets/images/svg/wallet.svg" alt="">
+                <h1 class="expense-heading">
+                    Add Transaction.
+                </h1>
+                <div class="form-input">
+                    <label>Expense Name</label>
+                    <input type="text" name="expenseName" id="expenseName">
+                </div>
+                <div class="form-input">
+                    <label>Enter Amount</label>
+                    <input type="text" name="amount" id="amount">
+                </div>
+                <button type="submit" id="saveExpenseBtn">Save Expense</button>
+            </form>
+        </div>
+        <div class="footer">
+            <p>FarmSpace Media &copy 2021</p>
+        </div>
+    </div>
+    <script src="../app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // const category = document.getElementById('category');
+            const expenseName = document.getElementById('expenseName');
+            const amount = document.getElementById('amount');
+            const user = JSON.parse(localStorage.getItem('user'));
+            console.log('local', user.id);
+            // const categories = [
+            //   {
+            //     id: 1,
+            //     name:'Food'
+            //   },
+            //   {
+            //     id: 2,
+            //     name: 'Fare'
+            //   },
+            //   {
+            //     id: 3,
+            //     name: 'Education'
+            //   },
+            //   {
+            //     id: 4,
+            //     name: 'Electricity'
+            //   },
+            //   {
+            //     id: 5,
+            //     name: 'Groceries'
+            //   }
+            // ];
+
+            // for(let i = 0; i < categories.length; i++){
+            //   const option = document.createElement('option');
+            //   option.value = categories[i].id;
+            //   option.textContent = categories[i].name;
+            //   category.appendChild(option);
+            // }
+
+            document.querySelector('form').addEventListener('submit', (event) => {
+                event.preventDefault();
+                // console.log('category', category.value);
+                console.log('amount', amount.value);
+                if (expenseName.value.length > 0 && amount.value.length > 0) {
+                    console.log('expense saved successfully');
+                    const payload = {
+                        user_id: user.id,
+                        name: expenseName.value,
+                        amount: amount.value
+                    };
+                    console.log('payload', payload);
+                    fetch('https://adonis-personal-finance-api.herokuapp.com/api/v1/expenses', {
+                        method: 'POST', // or 'PUT'
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data);
+                            // register(data);
+                            if (data.status) {
+                                window.location.href = 'index.html';
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+
+
+                } else {
+                    console.log('Failed to save Expense');
+                }
+            })
+        })
+    </script>
+
+</body>
+</div>
+
+</html>
