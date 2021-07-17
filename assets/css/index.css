@@ -1,11 +1,10 @@
 .appbar {
     width: 100%;
-    background-color: #4C2C85;
-    color: #FFDE00;
+    background:#001427;
+    color: #ffff;
     position: fixed;
-    top: 0px;
-    padding: 10px;
-    z-index: 2;
+    text-align: center;
+    padding :10px 0px;
 }
 
 .appbar__title {
@@ -16,39 +15,53 @@
 
 #app {
     padding: 60px 0px;
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .btn {
     width: 60px;
     height: 60px;
-    position: fixed;
-    bottom: 40px;
-    right: 10px;
-    background-color: #F54697;
+    position: absolute;
+    top: 530px;
+    background-color: #44CF6C;
     color: white;
     border-radius: 100%;
     padding: 10px;
     margin: 10px;
-    z-index: 2;
     border: 0px;
+    align-self: flex-end;
 }
 
 .expense__banner {
-    background-color: #4C2C85;
+    width: 90%;
+    height: 150px;
+    margin:40px auto;
+    background-color: #001427;
     color: #fff;
-    padding: 20px;
-    margin: 20px 20px;
+    padding: 20px 10px;
     border-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .expense_title {
-    margin: 20px 0px;
-    text-align: right;
-    color: #FFDE00;
+    color: #44CF6C;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px;
 }
 
 .expense_total {
-    text-align: right;
+    font-size: 50px;
+}
+.currency{
+    font-size: 14px;
+
 }
 
 .expense_categories {
@@ -75,4 +88,12 @@
 
 .expense {
     border-bottom: 1px solid gray;
+}
+.footer {
+    color: #32A287;
+    font-size: 14px;
+    background: #fff;
+    position: fixed;    
+    bottom: 0;
+    width: 100%;
 }
