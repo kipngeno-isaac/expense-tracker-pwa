@@ -1,0 +1,99 @@
+.appbar {
+    width: 100%;
+    background: #001427;
+    color: #FFFCF7;
+    /* position: fixed; */
+    top: 0px;
+    padding: 20px 50px;
+    font-weight: 400;
+    /* z-index: 2; */
+}
+
+.appbar__title {
+    font-size: 18px;
+    font-weight: 900;
+    padding: 0px 20px;
+    text-align: center;
+}
+
+.footer {
+    color: #32A287;
+    font-size: 14px;
+    background: #fff;
+    position: fixed;    
+    bottom: 0;
+    width: 100%;
+}
+
+.footer p {
+    padding: 10px;
+    text-align: center;
+}
+.expense{
+    width: 100%;
+    margin: 30px auto;
+    height: 500px;
+    /* border: 1px solid rgb(197, 196, 196); */
+    /* border-radius: 10px; */
+    /* padding: 30px 10px; */
+    /* background-color: #FFFCF7; */
+}
+.expense-heading{
+    font-weight: 400;
+    font-size: 28px;
+    color: rgb(68, 67, 67);
+    /* text-align: center; */
+}
+form {
+    width: 70%;
+    margin: auto;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.expense-svg{
+    width: 70%;
+    min-width: 120px;
+    /* max-widt h: 300px; */
+    margin: auto;
+    padding: 20px 0px 30px 0px  ;
+}
+form .form-input {
+    display: block;
+}
+
+.form-input label {
+    display: block;
+    padding: 18px 0px 8px 0px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(95, 93, 93, 0.93);
+}
+
+form input, select, textarea {
+    width: 100%;
+    padding: 12px 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(189, 188, 188);
+    background: transparent;
+}
+
+form button {
+    padding: 14px 30px ;
+    background-color: #32A287;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    margin: 50px auto;
+    border-radius: 8px;
+}
+form button:hover{
+    background: #44CF6C;
+    transition: ease-in .5s;
+}
+
+.login__header h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
