@@ -28,7 +28,72 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = 'expense.html';
   })
 
+  const publicVapidKey = 'BOx6niRL1VeYTNz1t_iMWJTAW4crETATuD8sUZnpovevzNri-NQpWqJP40kEtmALZPPpQ_ZFT7hDAx6cfsp9ReQ';
+
+  // Copied from the web-push documentation
+
+  if (!('serviceWorker' in navigator)) return;
+
+  let subscription = subscribeUserToPush()
+
+  sendSubscriptionToBackEnd(subscription)
 });
+
+function subscribeUserToPush() {
+  return navigator.serviceWorker.ready
+    .then(function (registration) {
+      const subscribeOptions = {
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(
+          'BOx6niRL1VeYTNz1t_iMWJTAW4crETATuD8sUZnpovevzNri-NQpWqJP40kEtmALZPPpQ_ZFT7hDAx6cfsp9ReQ'
+        )
+      };
+
+      return registration.pushManager.subscribe(subscribeOptions);
+    })
+    .then(function (pushSubscription) {
+      console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+      return pushSubscription;
+    });
+}
+
+function sendSubscriptionToBackEnd(subscription) {
+  return fetch('http://localhost:3333/api/v1/subscriptions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(subscription)
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error('Bad status code from server.');
+      }
+
+      return response.json();
+    })
+    .then(function (responseData) {
+      if (!(responseData.data && responseData.data.success)) {
+        throw new Error('Bad response from server.');
+      }
+    });
+}
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
 
 function setContent(data) {
   const expenseCategories = document.querySelector('.expense_categories');
