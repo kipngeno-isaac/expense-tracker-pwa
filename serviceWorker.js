@@ -18,9 +18,9 @@ self.addEventListener('push', (event) => {
   console.log('[Service Worker] Push Received.');
   console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
 
-  const title = 'Testing ....';
+  const title = 'Notification Subscription';
   const options = {
-    body: 'Yay it works.',
+    body: `Yay it works.${event.data.text()}`,
     icon: 'images/icon.png',
     badge: 'images/badge.png'
   };
