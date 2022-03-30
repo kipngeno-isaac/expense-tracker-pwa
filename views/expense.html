@@ -34,6 +34,12 @@
                     <input type="text" name="expenseName" id="expenseName">
                 </div>
                 <div class="form-input">
+                    <label></label>
+                    <select name="expenseCategory" id="expenseCategory">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-input">
                     <label>Enter Amount</label>
                     <input type="text" name="amount" id="amount">
                 </div>
@@ -50,6 +56,7 @@
             // const category = document.getElementById('category');
             const expenseName = document.getElementById('expenseName');
             const amount = document.getElementById('amount');
+            const category = document.getElementById('expenseCategory')
             const user = JSON.parse(localStorage.getItem('user'));
             console.log('local', user.id);
             // const categories = [
@@ -82,6 +89,19 @@
             //   category.appendChild(option);
             // }
 
+            fetch(`https://adonis-personal-finance-api.herokuapp.com/api/v1/categories/${user_id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        data.data.forEach(element => {
+                            var c = document.createElement("option");
+                            c.text = element.name;
+                            c.value = element.id;
+                            category.options.add(c);
+                        });
+                    }
+                })
+
             document.querySelector('form').addEventListener('submit', (event) => {
                 event.preventDefault();
                 // console.log('category', category.value);
@@ -91,7 +111,8 @@
                     const payload = {
                         user_id: user.id,
                         name: expenseName.value,
-                        amount: amount.value
+                        amount: amount.value,
+                        category_id: category.options(category.selectedIndex).value
                     };
                     console.log('payload', payload);
                     fetch('https://adonis-personal-finance-api.herokuapp.com/api/v1/expenses', {

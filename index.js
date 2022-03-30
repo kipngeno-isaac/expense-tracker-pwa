@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!('serviceWorker' in navigator)) return;
 
-  subscribeUserToPush()
+  subscribeUserToPush(state.user.id)
 
 });
 
-function subscribeUserToPush() {
+function subscribeUserToPush(user_id) {
   return navigator.serviceWorker.ready
     .then(function (registration) {
       const subscribeOptions = {
@@ -52,19 +52,19 @@ function subscribeUserToPush() {
     })
     .then(function (pushSubscription) {
       console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
-      sendSubscriptionToBackEnd(pushSubscription)
+      sendSubscriptionToBackEnd(user_id, pushSubscription)
 
       return pushSubscription;
     });
 }
 
-function sendSubscriptionToBackEnd(subscription) {
+function sendSubscriptionToBackEnd(user_id, subscription) {
   return fetch('https://adonis-personal-finance-api.herokuapp.com/api/v1/subscriptions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(subscription)
+    body: JSON.stringify({ user_id, subscription })
   })
     .then(function (response) {
       if (!response.ok) {
